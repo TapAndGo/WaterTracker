@@ -17,8 +17,8 @@ app.get("/", (req, res) => {
 
 
 
-import eventRouter from "./Routes/User.Route.js";
-app.use("/user", eventRouter);
+import hydration_goalsRoute from "./Routes/hydration_goals.Route.js";
+app.use("/hydration_goals", hydration_goalsRoute);
 
 app.listen(process.env.PORT, async () => {
   try {
