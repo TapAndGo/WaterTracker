@@ -1,5 +1,5 @@
 // repositories/user.repository.js
-import User from '../Models/hydration_goals.model.js';
+import User from '../Models/hydration_goals.Model.js';
 import bcrypt from 'bcrypt';
 
 /**

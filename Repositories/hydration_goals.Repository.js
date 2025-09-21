@@ -1,4 +1,4 @@
-import hydration_goals from "../Models/hydration_goals.model.js";
+import hydration_goals from "../Models/hydration_goals.Model.js";
 
 export const addHydrationGoalRespository = async (userId, goalMl, startDate, endDate) => {
   try {

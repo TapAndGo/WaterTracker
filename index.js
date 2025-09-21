@@ -18,7 +18,10 @@ app.get("/", (req, res) => {
 
 
 import hydration_goalsRoute from "./Routes/hydration_goals.Route.js";
+import intake_logsRoute from "./Routes/intake_logs.Route.js";
+
 app.use("/hydration_goals", hydration_goalsRoute);
+app.use("/intake_logs", intake_logsRoute);
 
 app.listen(process.env.PORT, async () => {
   try {

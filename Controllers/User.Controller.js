@@ -4,7 +4,7 @@ import {
   createUser,
   findUserByUsername,
   validatePassword,
-} from '../Repositories/User.repository.js';
+} from '../Repositories/User.Repository.js';
 
 const SECRET = 'supersecret'; // use process.env.SECRET in production
 

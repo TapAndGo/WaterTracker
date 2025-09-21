@@ -4,7 +4,7 @@ import {
   deleteHydrationGoalRespository,
   getHydrationGoalRespository,
   updateHydrationGoalRespository
-} from '../Repositories/hydration_goals.repository.js';
+} from '../Repositories/hydration_goals.Repository.js';
 
 export const addHydrationGoalController = async (req, res) => {
   try {
