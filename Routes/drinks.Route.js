@@ -3,10 +3,10 @@ import { createDrinkController , getAllDrinksController, getDrinkByIdController,
 
 const router = express.Router();
 
-router.post("/drinks", createDrinkController);
-router.get("/drinks", getAllDrinksController);
-router.get("/drinks/:id", getDrinkByIdController);
-router.put("/drinks/:id", updateDrinkController);
-router.delete("/drinks/:id", deleteDrinkController);
+router.post("/create", createDrinkController);
+router.get("/all", getAllDrinksController);
+router.get("/get/:id", getDrinkByIdController);
+router.put("/update/:id", updateDrinkController);
+router.delete("/delete/:id", deleteDrinkController);
 
 export default router;

@@ -6,8 +6,8 @@ export const createDrinkController = async (req, res) => {
   let level;
   let msg;
   try {
-    const drinkData = req.body;
-    const newDrink = await createDrinkRepository(drinkData);
+    const {name , hydrationPct} = req.body;
+    const newDrink = await createDrinkRepository({name , hydrationPct});
     level = 'info';
     msg = `Drink created with ID: ${newDrink.id}`;
     res.status(201).json(newDrink);
@@ -76,8 +76,8 @@ export const updateDrinkController = async (req, res) => {
   let msg;
   try {
     const { id } = req.params;
-    const updatedData = req.body;
-    const updatedDrink = await updateDrinkRepository(id, updatedData);
+    const {name , hydrationPct} = req.body;
+    const updatedDrink = await updateDrinkRepository(id, {name , hydrationPct});
     level = 'info';
     msg = `Updated drink with ID: ${id}`;
     res.status(200).json(updatedDrink);
@@ -103,10 +103,12 @@ export const deleteDrinkController = async (req, res) => {
       level = 'warn';
       msg = `Drink with ID: ${id} not found`;
       return res.status(404).json({ error: 'Drink not found' });
-    }
-    level = 'info';
+    }else{
+      level = 'info';
     msg = `Deleted drink with ID: ${id}`;
-    res.status(204).send();
+    res.status(200).json({ message: 'Drink deleted successfully' });
+    }
+    
   } catch (error) {
     level = 'error';
     msg = `Error deleting drink: ${error.message}`;
