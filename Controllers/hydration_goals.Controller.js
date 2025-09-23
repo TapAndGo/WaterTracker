@@ -62,7 +62,7 @@ export const getHydrationGoalController = async (req, res) => {
   let level;
   let msg;
     try {
-      const { user_id } = req.body;
+      const { user_id } = req.params;
 
       const goals = await getHydrationGoalRespository(user_id);
 

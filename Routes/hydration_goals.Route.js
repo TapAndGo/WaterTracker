@@ -5,8 +5,8 @@ import { deleteHydrationGoalController, addHydrationGoalController , getHydratio
 const router = express.Router();
 
 router.post('/add', addHydrationGoalController);
-router.post('/delete', deleteHydrationGoalController);
-router.get('/get', getHydrationGoalController);
+router.delete('/delete', deleteHydrationGoalController);
+router.get('/get/:user_id', getHydrationGoalController);
 router.put('/update', updateHydrationGoalController);
 
 

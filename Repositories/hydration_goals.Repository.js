@@ -23,6 +23,9 @@ export const deleteHydrationGoalRespository = async (userId, goalId) => {
       id: goalId,
     },
   });
+  if(!deletedGoal){
+    throw new Error('Hydration goal not found');
+  }
   return deletedGoal;
   } catch (error) {
     console.error('Error deleting hydration goal:', error);
@@ -46,23 +49,35 @@ export const getHydrationGoalRespository = async (userId) => {
 
 export const updateHydrationGoalRespository = async (userId, goalId, goalMl, startDate, endDate) => {
   try {
-    const updatedGoal = await hydration_goals.update(
-    {
-      goalMl,
-      startDate,
-      endDate,
-    },
-    {
-      where: {
-        user_id: userId,
-        id: goalId,
+    const [updated] = await hydration_goals.update(
+      {
+        goalMl,
+        startDate,
+        endDate,
       },
+      {
+        where: {
+          user_id: userId,
+          id: goalId,
+        },
+        returning: true, // works only in Postgres
+      }
+    );
+
+    if (updated === 0) {
+      throw new Error('Hydration goal not found or not updated');
     }
-  );
-  return updatedGoal;
+
+    // If you want to fetch the updated row:
+    const updatedGoal = await hydration_goals.findOne({
+      where: { user_id: userId, id: goalId },
+    });
+
+    return updatedGoal;
   } catch (error) {
     console.error('Error updating hydration goal:', error);
     throw error;
   }
 };
+
 
