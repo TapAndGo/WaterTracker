@@ -37,28 +37,28 @@ It allows users to set hydration goals, log beverages, and track their progress 
 
 ## 📂 Project Structure
 
-/models
-├── drinks.Model.js 
-├── hydration_goals.Model.js
-├── intake_logs.Model.js
-/Repository
-├── drinks.Repository.js 
-├── hydration_goals.Repository.js
-├── intake_logs.Repository.js
-/Controllers
-├── drinks.Controller.js 
-├── hydration_goals.Controller.js
-├── intake_logs.Controller.js
-/Routes
-├── drinks.Routes.js 
-├── hydration_goals.Routes.js
-├── intake_logs.Routes.js
-/Middleware
-/utils
-└── db.js # Sequelize connection
-└── logger.js # Sequelize connection
-└── logs.js # Sequelize connection
-└── sync.js # Sequelize connection
+- **/models**
+- ├── drinks.Model.js 
+- ├── hydration_goals.Model.js
+- ├── intake_logs.Model.js
+- **/Repository**
+- ├── drinks.Repository.js
+- ├── hydration_goals.Repository.js
+- ├── intake_logs.Repository.js
+- **/Controllers**
+- ├── drinks.Controller.js 
+- ├── hydration_goals.Controller.js
+- ├── intake_logs.Controller.js
+- **/Routes**
+- ├── drinks.Routes.js 
+- ├── hydration_goals.Routes.js
+- ├── intake_logs.Routes.js
+- **/Middleware**
+- **/utils**
+- └── db.js # Sequelize connection
+- └── logger.js # Sequelize connection
+- └── logs.js # Sequelize connection
+- └── sync.js # Sequelize connection
 
 
 ## Setup & Installation
