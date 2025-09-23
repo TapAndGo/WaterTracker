@@ -1,0 +1,517 @@
+{
+  "type": "collection.insomnia.rest/5.0",
+  "name": "Water Tracker",
+  "meta": {
+    "id": "wrk_91eb177a0b92451395ca11acfb5c38e4",
+    "created": 1758463238142,
+    "modified": 1758463238142,
+    "description": ""
+  },
+  "collection": [
+    {
+      "name": "Hydration Goals",
+      "meta": {
+        "id": "fld_585c6aa1c809483d9c29c06af0fc4542",
+        "created": 1758627944468,
+        "modified": 1758627944468,
+        "sortKey": -1758627944468,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "http://localhost:3001/hydration_goals/add/",
+          "name": "Create Goal",
+          "meta": {
+            "id": "req_339373d822bf4cfebc74fadd048afc88",
+            "created": 1758629638242,
+            "modified": 1758629740461,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758629638242
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"goalMl\": 3000,\n  \"startDate\": \"2025-09-21\",\n  \"endDate\": \"2025-10-21\"\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/hydration_goals/delete/",
+          "name": "Delete Goal",
+          "meta": {
+            "id": "req_4fd6397185704b91a0d5e01323091fb7",
+            "created": 1758629771538,
+            "modified": 1758629855250,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758629771538
+          },
+          "method": "DELETE",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"goalId\": 1\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/hydration_goals/get/2",
+          "name": "Get goal by user id",
+          "meta": {
+            "id": "req_bce7895a3271462bb906f3c366c9986c",
+            "created": 1758629914785,
+            "modified": 1758630688905,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758629914785
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/hydration_goals/update",
+          "name": "Update Goal",
+          "meta": {
+            "id": "req_deeffef399ce46faa3ea71b59db74c2d",
+            "created": 1758630019295,
+            "modified": 1758630707506,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758630019295
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"goalId\": 3,\n  \"goalMl\": 5000,\n  \"startDate\": \"2025-09-01T00:00:00.000Z\",\n  \"endDate\": \"2025-09-30T23:59:59.000Z\"\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Intake Logs",
+      "meta": {
+        "id": "fld_46a0d4e4237d4a789f9d0639764034dc",
+        "created": 1758630423982,
+        "modified": 1758630423982,
+        "sortKey": -1758630423982,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "http://localhost:3001/intake_logs/create",
+          "name": "Create Logs",
+          "meta": {
+            "id": "req_096bdf7202d54caba53736abb9c4e5cf",
+            "created": 1758630427420,
+            "modified": 1758631579069,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758630427420
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"volumeMl\": 500,\n  \"hydrationPct\": 80,\n  \"effectiveMl\": 400\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/intake_logs/delete",
+          "name": "Delete Logs",
+          "meta": {
+            "id": "req_02cd41af6a62476ba8985abbd41f060b",
+            "created": 1758630568339,
+            "modified": 1758630767309,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758630568339
+          },
+          "method": "DELETE",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"logId\": 2\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/intake_logs/update",
+          "name": "Update Logs",
+          "meta": {
+            "id": "req_3df1909edd8c42179fa0a3650a95b04e",
+            "created": 1758630791510,
+            "modified": 1758631275360,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758630791510
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"user_id\": 1,\n  \"logId\": 3,\n  \"volumeMl\": 500,\n  \"hydrationPct\": 90,\n  \"effectiveMl\": 450\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/intake_logs/get/1",
+          "name": "Get log by user id",
+          "meta": {
+            "id": "req_8c267edfacd04fa4804fc39d6a999966",
+            "created": 1758631258404,
+            "modified": 1758631318522,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758631258404
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "Drinks",
+      "meta": {
+        "id": "fld_1d68a26849f34dfaa170997691fafe95",
+        "created": 1758631659506,
+        "modified": 1758631665436,
+        "sortKey": -1758630424082,
+        "description": ""
+      },
+      "children": [
+        {
+          "url": "http://localhost:3001/drinks/create",
+          "name": "Create Drink",
+          "meta": {
+            "id": "req_6da0e2b30c6349adb09f76aeaaa0a060",
+            "created": 1758631670451,
+            "modified": 1758631896790,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758631670451
+          },
+          "method": "POST",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"name\": \"Orange Juice\",\n  \"hydrationPct\": 90\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/drinks/all",
+          "name": "Get all drinks",
+          "meta": {
+            "id": "req_29ebaa372ee142269ac4e31eb229b77e",
+            "created": 1758631916471,
+            "modified": 1758631954652,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758631916471
+          },
+          "method": "GET",
+          "body": {
+            "mimeType": "application/json",
+            "text": ""
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/drinks/get/1",
+          "name": "Get drink by id",
+          "meta": {
+            "id": "req_c9c93318744a451e9d1d4fad23256f3c",
+            "created": 1758631978840,
+            "modified": 1758632006835,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758631978840
+          },
+          "method": "GET",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/drinks/update/1",
+          "name": "Update Drink",
+          "meta": {
+            "id": "req_40d1753ec29d41dcbca8b435f7948c61",
+            "created": 1758632022484,
+            "modified": 1758632119888,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758632022484
+          },
+          "method": "PUT",
+          "body": {
+            "mimeType": "application/json",
+            "text": "{\n  \"name\": \"Orange Juice\",\n  \"hydrationPct\": 80\n}\n"
+          },
+          "headers": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        },
+        {
+          "url": "http://localhost:3001/drinks/delete/4",
+          "name": "Delete Drink",
+          "meta": {
+            "id": "req_65b0910458914b68a5d453860cb7e885",
+            "created": 1758632132284,
+            "modified": 1758632307034,
+            "isPrivate": false,
+            "description": "",
+            "sortKey": -1758632132284
+          },
+          "method": "DELETE",
+          "headers": [
+            {
+              "name": "User-Agent",
+              "value": "insomnia/11.6.1"
+            }
+          ],
+          "settings": {
+            "renderRequestBody": true,
+            "encodeUrl": true,
+            "followRedirects": "global",
+            "cookies": {
+              "send": true,
+              "store": true
+            },
+            "rebuildPath": true
+          }
+        }
+      ]
+    }
+  ],
+  "cookieJar": {
+    "name": "Default Jar",
+    "meta": {
+      "id": "jar_0c002cec2fa782ca157f61ad40e21df3f6a2772b",
+      "created": 1758463238167,
+      "modified": 1758463238167
+    }
+  },
+  "environments": {
+    "name": "Base Environment",
+    "meta": {
+      "id": "env_0c002cec2fa782ca157f61ad40e21df3f6a2772b",
+      "created": 1758463238154,
+      "modified": 1758631532628,
+      "isPrivate": false
+    },
+    "data": {
+      "LOCAL_URL": "http://localhost:3001/"
+    }
+  }
+}
