@@ -20,7 +20,11 @@ export const getIntakeLogsRepository = async (userId) => {
 
 export const deleteIntakeLogRepository = async (userId, logId) => {
   try {
-    return await intake_logs.destroy({ where: { user_id: userId, id: logId } });
+    const deletedLog = await intake_logs.destroy({ where: { user_id: userId, id: logId } });
+    if(!deletedLog){
+      throw new Error('Intake log not found');
+    }
+    return deletedLog;
   } catch (error) {
     console.error('Error deleting intake log:', error);
     throw error;
@@ -29,10 +33,14 @@ export const deleteIntakeLogRepository = async (userId, logId) => {
 
 export const updateIntakeLogRepository = async (userId, logId, volumeMl, hydrationPct, effectiveMl) => {
   try {
-    return await intake_logs.update(
+    const updatedLog = await intake_logs.update(
       { volumeMl, hydrationPct, effectiveMl },
       { where: { user_id: userId, id: logId } }
     );
+
+    const updated = await intake_logs.findOne({ where: { user_id: userId, id: logId } });
+
+    return updated;
   } catch (error) {
     console.error('Error updating intake log:', error);
     throw error;

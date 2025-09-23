@@ -4,8 +4,8 @@ import {createIntakeLogController, getIntakeLogsController , deleteIntakeLogCont
 const router = express.Router();
 
 router.post('/create', createIntakeLogController);
-router.post('/delete', deleteIntakeLogController);
+router.delete('/delete', deleteIntakeLogController);
 router.put('/update', updateIntakeLogController);
-router.get('/get', getIntakeLogsController);
+router.get('/get/:user_id', getIntakeLogsController);
 
 export default router;
