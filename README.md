@@ -64,30 +64,30 @@ It allows users to set hydration goals, log beverages, and track their progress 
 ## Setup & Installation
 
 1. Clone repository
-git clone https://github.com/TapAndGo/WaterTracker.git
-cd WaterTracker
+- `git clone https://github.com/TapAndGo/WaterTracker.git`
+- `cd WaterTracker`
 
 2. Install dependencies
-npm install
+- `npm install`
 
 3. Configure environment variables (.env)
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=water_tracker
-DB_USER=postgres
-DB_PASS=yourpassword
+- DB_HOST=localhost
+- DB_PORT=5432
+- DB_NAME=water_tracker
+- DB_USER=postgres
+- DB_PASS=yourpassword
 
 4. Run database migrations (if any) and start server
 
-npm run dev
+- `npm run dev`
 
-🛡️ License
+- **🛡️ License**
 
-MIT License © 2025
+- MIT License © 2025
 
-✨ Author
+- **✨ Author**
 
-Built with 💧 by ordo-chao.
+- `Built with 💧 by ordo-chao.`
 
 
