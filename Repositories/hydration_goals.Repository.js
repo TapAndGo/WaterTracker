@@ -1,83 +1,76 @@
-import hydration_goals from "../Models/hydration_goals.Model.js";
+import { hydration_goals } from "../Models/index.js";
 
-export const addHydrationGoalRespository = async (userId, goalMl, startDate, endDate) => {
+
+export const addHydrationGoalRepository = async (data) => {
   try {
+    const {
+      user_id,
+      goalMl,
+      startDate,
+      endDate,
+    } = data;
+
     const newGoal = await hydration_goals.create({
-    user_id: userId,
-    goalMl,
-    startDate,
-    endDate,
-  });
-  return newGoal;
+      user_id,
+      goalMl,
+      startDate,
+      endDate,
+    });
+
+    return newGoal;
   } catch (error) {
-    console.error('Error adding hydration goal:', error);
+    console.error("❌ Error adding hydration goal:", error);
     throw error;
   }
 };
 
-export const deleteHydrationGoalRespository = async (userId, goalId) => {
+
+export const deleteHydrationGoalRepository = async (user_id, goalId) => {
   try {
     const deletedGoal = await hydration_goals.destroy({
-    where: {
-      user_id: userId,
-      id: goalId,
-    },
-  });
-  if(!deletedGoal){
-    throw new Error('Hydration goal not found');
-  }
-  return deletedGoal;
-  } catch (error) {
-    console.error('Error deleting hydration goal:', error);
-    throw error;
-  }
-};
+      where: { user_id, id: goalId },
+    });
 
-export const getHydrationGoalRespository = async (userId) => {
-  try {
-    const goals = await hydration_goals.findAll({
-    where: {
-      user_id: userId,
-    },
-  });
-  return goals;
-  } catch (error) {
-    console.error('Error getting hydration goals:', error);
-    throw error;
-  }
-};
-
-export const updateHydrationGoalRespository = async (userId, goalId, goalMl, startDate, endDate) => {
-  try {
-    const [updated] = await hydration_goals.update(
-      {
-        goalMl,
-        startDate,
-        endDate,
-      },
-      {
-        where: {
-          user_id: userId,
-          id: goalId,
-        },
-        returning: true, // works only in Postgres
-      }
-    );
-
-    if (updated === 0) {
-      throw new Error('Hydration goal not found or not updated');
+    if (!deletedGoal) {
+      throw new Error("Hydration goal not found");
     }
 
-    // If you want to fetch the updated row:
+    return deletedGoal;
+  } catch (error) {
+    console.error("❌ Error deleting hydration goal:", error);
+    throw error;
+  }
+};
+
+
+export const getHydrationGoalRepository = async (user_id) => {
+  try {
+    const goals = await hydration_goals.findAll({ where: { user_id } });
+    return goals;
+  } catch (error) {
+    console.error("❌ Error fetching hydration goals:", error);
+    throw error;
+  }
+};
+
+
+export const updateHydrationGoalRepository = async (user_id, goalId, updates) => {
+  try {
+    const [updated] = await hydration_goals.update(updates, {
+      where: { user_id, id: goalId },
+    });
+
+    if (updated === 0) {
+      throw new Error("Hydration goal not found or not updated");
+    }
+
     const updatedGoal = await hydration_goals.findOne({
-      where: { user_id: userId, id: goalId },
+      where: { user_id, id: goalId },
     });
 
     return updatedGoal;
   } catch (error) {
-    console.error('Error updating hydration goal:', error);
+    console.error("❌ Error updating hydration goal:", error);
     throw error;
   }
 };
-
-
