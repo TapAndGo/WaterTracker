@@ -4,10 +4,10 @@ import { deleteHydrationGoalController, addHydrationGoalController , getHydratio
 import { verifyToken}  from '../Middlewares/jwt_token_verification.js';
 const router = express.Router();
 
-router.post('/add', verifyToken, addHydrationGoalController);
-router.delete('/delete', verifyToken, deleteHydrationGoalController);
-router.get('/get/:user_id', verifyToken, getHydrationGoalController);
-router.put('/update', verifyToken, updateHydrationGoalController);
+router.post('/', verifyToken, addHydrationGoalController);
+router.delete('/', verifyToken, deleteHydrationGoalController);
+router.get('/', verifyToken, getHydrationGoalController);
+router.put('/', verifyToken, updateHydrationGoalController);
 
 
 export default router;

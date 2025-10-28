@@ -74,3 +74,4 @@ export const updateHydrationGoalRepository = async (user_id, goalId, updates) =>
     throw error;
   }
 };
+

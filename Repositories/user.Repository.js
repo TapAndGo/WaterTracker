@@ -1,13 +1,17 @@
 import {user} from "../Models/index.js";
 
-export const createUserRepository = async (user_id, user_age, gender, activity_level, climate) => {
+export const createUserRepository = async (user_id, user_age, gender, activity_level, climate , user_weight , user_height , wake_up_time , sleep_time) => {
   try {
     const newUser = await user.create({
     user_id,
     user_age,
     gender,
     activity_level,
-    climate
+    climate,
+    user_weight,
+    user_height,
+    wake_up_time,
+    sleep_time
   });
   return newUser;
   } catch (error) {
@@ -17,25 +21,46 @@ export const createUserRepository = async (user_id, user_age, gender, activity_l
 
 export const getUserRepository = async (user_id) => {
   try {
-    const user = await user.findOne({ where: { user_id } });
-    return user;
+    const User = await user.findOne({ where: { user_id } });
+    return User;
   } catch (error) {
     throw error;
   }
 };
 
-export const updateUserRepository = async (user_id, updates) => {
+export const updateUserRepository = async (user_id, user_age, gender, activity_level, climate) => {
   try {
-    const [updated] = await user.update(updates, { where: { user_id } });
-    return updated;
+    const updates = {
+      user_age,
+      gender,
+      activity_level,
+      climate,
+    };
+
+    // Update user
+    const [updated] = await user.update(updates, {
+      where: { user_id },
+    });
+
+    if (!updated) {
+      throw new Error("User not found or no changes made");
+    }
+
+    // Fetch and return the updated record
+    const updatedUser = await user.findOne({ where: { user_id } });
+    return updatedUser;
   } catch (error) {
     throw error;
   }
 };
+
 
 export const deleteUserRepository = async (user_id) => {
   try {
     const deleted = await user.destroy({ where: { user_id } });
+    if(!deleted){
+      throw new Error("User not found");
+    }
     return deleted;
   } catch (error) {
     throw error;

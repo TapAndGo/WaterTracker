@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import sequelize from './Utils/db.js';
 import './Models/index.js'
+import ensureViewExists from './Utils/ViewChecker.js'
 // import { router } from "./routes/routes.js";
 
 
@@ -19,11 +20,11 @@ app.get("/", (req, res) => {
 
 import hydration_goalsRoute from "./Routes/hydration_goals.Route.js";
 import userRoute from "./Routes/user.Route.js";
-import custom_cupRoute from "./Routes/custom_cups.Route.js";
+import intake_logRoute from "./Routes/intake_log.Route.js";
 
 app.use("/hydration_goals", hydration_goalsRoute);
 app.use("/user", userRoute);
-app.use("/custom_cups", custom_cupRoute);
+app.use("/intake_log", intake_logRoute);
 
 
 app.listen(process.env.PORT, async () => {
@@ -32,7 +33,8 @@ app.listen(process.env.PORT, async () => {
     console.log("✅ Database connected...");
 
     // Sync all models
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
+    await ensureViewExists();
     console.log(`Server running on port ${process.env.PORT}`);
   } catch (error) {
      console.error("❌ Database error:", error);

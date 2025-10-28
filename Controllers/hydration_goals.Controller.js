@@ -7,6 +7,7 @@ import {
 import { logs } from "../Utils/logs.js";
 import { calculateHydrationGoal} from "../Middlewares/calculate_goal.js";
 import {getUserRepository} from "../Repositories/user.Repository.js";
+import {generateHydrationRemindersRepository} from "../Repositories/hydration_reminder.Repository.js";
 
 export const addHydrationGoalController = async (req, res) => {
   const startTime = process.hrtime.bigint();
@@ -19,26 +20,34 @@ export const addHydrationGoalController = async (req, res) => {
     const {
       startDate,
       endDate,
-      user_age,
       goalMl
     } = req.body;
 
     const user = req.user;
-    const  user_id = user.id;
+    const  user_id = user.user_id;
 
+
+    // Get user data
      const userData = await getUserRepository(user_id);
 
     if(goalMl === null) {
-      goalMl = await calculateHydrationGoal(user_age, userData.gender, userData.activity_level, userData.climate);
+      goalMl = calculateHydrationGoal(userData.user_age, userData.gender, userData.activity_level, userData.climate , userData.user_weight , userData.user_height , userData.wake_up_time , userData.sleep_time);
     }
 
-
+    // Add hydration goal
     const newGoal = await addHydrationGoalRepository({
       user_id,
       goalMl,
       startDate,
       endDate,
     });
+
+    // Generate hydration reminders
+   const reminders = await generateHydrationRemindersRepository(userData);
+   if(!reminders) {
+     throw new Error('Error generating hydration reminders');
+   }
+
 
     level = 'info';
     msg = `Hydration goal added with ID: ${newGoal.id}`;
@@ -77,7 +86,7 @@ export const deleteHydrationGoalController = async (req, res) => {
     const { goalId } = req.body;
 
         const user = req.user;
-    const  user_id = user.id;
+    const  user_id = user.user_id;
 
     const deletedGoal = await deleteHydrationGoalRepository(user_id, goalId);
 
@@ -106,7 +115,8 @@ export const getHydrationGoalController = async (req, res) => {
   let msg;
 
   try {
-    const { user_id } = req.params;
+    const user = req.user;
+    const  user_id = user.user_id;
 
     const goals = await getHydrationGoalRepository(user_id);
 
@@ -139,18 +149,16 @@ export const updateHydrationGoalController = async (req, res) => {
       goalMl,
       startDate,
       endDate,
-      progress
     } = req.body;
 
       const user = req.user;
-    const  user_id = user.id;
+    const  user_id = user.user_id;
 
 
     const updatedGoal = await updateHydrationGoalRepository(user_id, goalId, {
       goalMl,
       startDate,
       endDate,
-      progress,
     });
 
     level = 'info';
@@ -170,3 +178,5 @@ export const updateHydrationGoalController = async (req, res) => {
     logs(durationMicroseconds, level, req.ip, req.method, msg, req.url, res.statusCode, req.headers["user-agent"]);
   }
 };
+
+

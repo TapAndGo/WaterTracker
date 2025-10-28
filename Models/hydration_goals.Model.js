@@ -2,12 +2,16 @@
 import { DataTypes } from 'sequelize';
 import sequelize from '../Utils/db.js';
 import user from './user.Model.js';
-// import bcrypt from 'bcrypt';
+
 
 const hydration_goals = sequelize.define('hydration_goals', {
-  id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  id: {
+    type: DataTypes.UUID,
+    defaultValue: DataTypes.UUIDV4,
+    primaryKey: true
+  },
   user_id: {
-    type: DataTypes.STRING,
+    type: DataTypes.INTEGER,
     allowNull: false,
     references: {
       model: user,

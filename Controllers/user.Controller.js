@@ -1,6 +1,6 @@
 import { logs } from "../Utils/logs.js";
 
-import { createUserRepository , getUserRepository , updateUserRepository , deleteUserRepository } from "../Repositories/user.Repository.js";
+import { createUserRepository, getUserRepository, updateUserRepository, deleteUserRepository } from "../Repositories/user.Repository.js";
 
 export const createUserController = async (req, res) => {
   const startTime = process.hrtime.bigint();
@@ -13,10 +13,14 @@ export const createUserController = async (req, res) => {
       user_age,
       gender,
       activity_level,
-      climate
+      climate,
+      user_weight,
+      user_height,
+      wake_up_time,
+      sleep_time
     } = req.body;
 
-    const newUser = await createUserRepository(user_id, user_age, gender, activity_level, climate);
+    const newUser = await createUserRepository(user_id, user_age, gender, activity_level, climate, user_weight, user_height, wake_up_time, sleep_time);
 
     level = 'info';
     msg = `User created with ID: ${newUser.id}`;
@@ -28,7 +32,15 @@ export const createUserController = async (req, res) => {
   } catch (err) {
     level = 'error';
     msg = `Error creating user: ${err.message}`;
-    res.status(400).json({ error: err.message });
+    if (err.message.includes("invalid input value for enum")) {
+      const field = err.message.match(/enum_(\w+)_/);
+      return res.status(400).json({
+        error: `Invalid value for ${field ? field[1] : 'an enum field'}.`
+      });
+    }
+    else {
+      res.status(400).json({ error: err.message });
+    }
   } finally {
     const endTime = process.hrtime.bigint();
     const durationMicroseconds = Number(endTime - startTime) / 1000;
@@ -44,14 +56,18 @@ export const getUserController = async (req, res) => {
   try {
     const { user_id } = req.params;
 
-    const user = await getUserRepository(user_id);
+    const User = await getUserRepository(user_id);
 
     level = 'info';
     msg = 'User retrieved successfully';
 
+    if(!User) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
     res.status(200).json({
       message: 'User retrieved successfully',
-      user,
+      User,
     });
   } catch (err) {
     level = 'error';
@@ -81,7 +97,7 @@ export const updateUserController = async (req, res) => {
     const updatedUser = await updateUserRepository(user_id, user_age, gender, activity_level, climate);
 
     level = 'info';
-    msg = `User updated with ID: ${updatedUser.id}`;
+    msg = `User updated with ID: ${updatedUser.user_id}`;
 
     res.status(200).json({
       message: 'User updated successfully',
@@ -98,6 +114,7 @@ export const updateUserController = async (req, res) => {
   }
 };
 
+
 export const deleteUserController = async (req, res) => {
   const startTime = process.hrtime.bigint();
   let level;
@@ -113,12 +130,11 @@ export const deleteUserController = async (req, res) => {
 
     res.status(200).json({
       message: 'User deleted successfully',
-      deletedUser,
     });
   } catch (err) {
     level = 'error';
     msg = `Error deleting user: ${err.message}`;
-    res.status(400).json({ error: err.message });
+    res.status(404).json({ error: err.message });
   } finally {
     const endTime = process.hrtime.bigint();
     const durationMicroseconds = Number(endTime - startTime) / 1000;
