@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import sequelize from './Utils/db.js';
 import './Models/index.js'
-import ensureViewExists from './Utils/ViewChecker.js'
 // import { router } from "./routes/routes.js";
 
 
@@ -34,7 +33,6 @@ app.listen(process.env.PORT, async () => {
 
     // Sync all models
     await sequelize.sync( { force: true } );
-    await ensureViewExists();
     console.log(`Server running on port ${process.env.PORT}`);
   } catch (error) {
      console.error("❌ Database error:", error);
