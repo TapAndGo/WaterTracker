@@ -1,4 +1,4 @@
-# 💧 Water Tracker Backend (Node.js + Sequelize)
+# 💧 Water Tracker Backend
 
 This backend service powers the **Water Tracker App**, which helps users monitor, manage, and improve their daily water intake.  
 It allows users to set hydration goals, log beverages, and track their progress toward better hydration habits.
