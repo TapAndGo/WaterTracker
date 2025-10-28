@@ -4,9 +4,9 @@ import { verifyToken } from "../Middlewares/jwt_token_verification.js";
 
 const router = express.Router();
 
-router.post('/onboard', createUserController);
-router.get('/get/:user_id', getUserController);
-router.put('/update', updateUserController);
-router.delete('/delete', deleteUserController);
+router.post('/', verifyToken, createUserController);
+router.get('/', verifyToken, getUserController);
+router.put('/', verifyToken, updateUserController);
+router.delete('/',  verifyToken, deleteUserController);
 
 export default router;

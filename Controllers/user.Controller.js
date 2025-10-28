@@ -9,7 +9,6 @@ export const createUserController = async (req, res) => {
 
   try {
     const {
-      user_id,
       user_age,
       gender,
       activity_level,
@@ -19,6 +18,9 @@ export const createUserController = async (req, res) => {
       wake_up_time,
       sleep_time
     } = req.body;
+
+     const user = req.user;
+    const  user_id = user.user_id;
 
     const newUser = await createUserRepository(user_id, user_age, gender, activity_level, climate, user_weight, user_height, wake_up_time, sleep_time);
 
@@ -54,7 +56,8 @@ export const getUserController = async (req, res) => {
   let msg;
 
   try {
-    const { user_id } = req.params;
+         const user = req.user;
+    const  user_id = user.user_id;
 
     const User = await getUserRepository(user_id);
 
@@ -87,12 +90,14 @@ export const updateUserController = async (req, res) => {
 
   try {
     const {
-      user_id,
       user_age,
       gender,
       activity_level,
       climate
     } = req.body;
+
+         const user = req.user;
+    const  user_id = user.user_id;
 
     const updatedUser = await updateUserRepository(user_id, user_age, gender, activity_level, climate);
 
@@ -121,7 +126,8 @@ export const deleteUserController = async (req, res) => {
   let msg;
 
   try {
-    const { user_id } = req.body;
+         const user = req.user;
+    const  user_id = user.user_id;
 
     const deletedUser = await deleteUserRepository(user_id);
 
