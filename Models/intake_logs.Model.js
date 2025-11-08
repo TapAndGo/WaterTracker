@@ -33,8 +33,7 @@ const IntakeLog = sequelize.define('IntakeLog', {
   tableName: 'intake_logs',
   timestamps: false,
   indexes: [
-    { fields: ['user_id'] },
-    { fields: ['date'] }
+    { fields: ['user_id' , 'date'] },
   ]
 });
 

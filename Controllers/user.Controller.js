@@ -90,16 +90,18 @@ export const updateUserController = async (req, res) => {
 
   try {
     const {
-      user_age,
-      gender,
       activity_level,
-      climate
+      climate,
+      wake_up_time,
+      sleep_time,
+      user_height,
+      user_weight
     } = req.body;
 
          const user = req.user;
     const  user_id = user.user_id;
 
-    const updatedUser = await updateUserRepository(user_id, user_age, gender, activity_level, climate);
+    const updatedUser = await updateUserRepository(user_id, activity_level, climate, wake_up_time, sleep_time, user_height, user_weight);
 
     level = 'info';
     msg = `User updated with ID: ${updatedUser.user_id}`;

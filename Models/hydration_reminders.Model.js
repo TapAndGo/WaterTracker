@@ -30,8 +30,7 @@ const hydration_reminder = sequelize.define('hydration_reminder', {
   tableName: 'hydration_reminders',
   timestamps: false,
   indexes: [
-    { fields: ['user_id'] },
-    { fields: ['reminder_time'] }
+    { fields: ['user_id' , 'reminder_time'] },
   ]
 });
 

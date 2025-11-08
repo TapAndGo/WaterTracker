@@ -54,11 +54,11 @@ export const getHydrationGoalRepository = async (user_id) => {
 };
 
 
-export const updateHydrationGoalRepository = async (user_id, goalId, updates) => {
+export const updateHydrationGoalRepository = async (user_id, goalId, updates , transaction) => {
   try {
     const [updated] = await hydration_goals.update(updates, {
       where: { user_id, id: goalId },
-    });
+    } , {transaction} );
 
     if (updated === 0) {
       throw new Error("Hydration goal not found or not updated");

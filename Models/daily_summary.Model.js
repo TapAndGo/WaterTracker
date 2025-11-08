@@ -6,12 +6,15 @@ const UserDailyIntakeSummary = sequelize.define(
   {
     user_id: { type: DataTypes.INTEGER, primaryKey: true },
     date: DataTypes.DATEONLY,
-    total_intake_ml: DataTypes.FLOAT,
-    log_count: DataTypes.INTEGER
+    total_intake_ml: { type: DataTypes.INTEGER, defaultValue: 0 },
+    log_count: { type: DataTypes.INTEGER, defaultValue: 0 },
   },
   {
     timestamps: false,
-    freezeTableName: true // prevents Sequelize from pluralizing the view name
+    freezeTableName: true  ,// prevents ,
+     indexes: [
+    { fields: ['user_id', 'date'] }
+  ]
   }
 );
 

@@ -83,7 +83,7 @@ export const deleteHydrationGoalController = async (req, res) => {
   let msg;
 
   try {
-    const { goalId } = req.body;
+    const goalId = req.params.id;
 
         const user = req.user;
     const  user_id = user.user_id;

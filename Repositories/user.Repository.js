@@ -28,13 +28,15 @@ export const getUserRepository = async (user_id) => {
   }
 };
 
-export const updateUserRepository = async (user_id, user_age, gender, activity_level, climate) => {
+export const updateUserRepository = async (user_id, activity_level, climate, wake_up_time, sleep_time, user_height, user_weight) => {
   try {
     const updates = {
-      user_age,
-      gender,
       activity_level,
       climate,
+      wake_up_time,
+      sleep_time,
+      user_height,
+      user_weight
     };
 
     // Update user

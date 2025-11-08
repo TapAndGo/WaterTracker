@@ -5,7 +5,7 @@ import { verifyToken}  from '../Middlewares/jwt_token_verification.js';
 const router = express.Router();
 
 router.post('/', verifyToken, addHydrationGoalController);
-router.delete('/', verifyToken, deleteHydrationGoalController);
+router.delete('/:id', verifyToken, deleteHydrationGoalController);
 router.get('/', verifyToken, getHydrationGoalController);
 router.put('/', verifyToken, updateHydrationGoalController);
 
