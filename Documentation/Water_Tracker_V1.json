@@ -1,517 +1,1446 @@
-{
-  "type": "collection.insomnia.rest/5.0",
-  "name": "Water Tracker",
-  "meta": {
-    "id": "wrk_91eb177a0b92451395ca11acfb5c38e4",
-    "created": 1758463238142,
-    "modified": 1758463238142,
-    "description": ""
-  },
-  "collection": [
-    {
-      "name": "Hydration Goals",
-      "meta": {
-        "id": "fld_585c6aa1c809483d9c29c06af0fc4542",
-        "created": 1758627944468,
-        "modified": 1758627944468,
-        "sortKey": -1758627944468,
-        "description": ""
-      },
-      "children": [
+type: collection.insomnia.rest/5.0
+name: Water Tracker
+meta:
+  id: wrk_353868ec4c4c446591376de8ed2b701e
+  created: 1762596976295
+  modified: 1762597001190
+  description: ""
+collection:
+  - name: User
+    meta:
+      id: fld_171f0da3a25d42d487ee8aebbb744258
+      created: 1762597062055
+      modified: 1762667776618
+      sortKey: -1762597062055
+      description: |+
+        # 🧍‍♂️ User API Summary
+
+        **Base URL:** `/api/user`  
+        **Authentication:** ✅ All endpoints require a valid JWT token in the request header.
+
+        ---
+
+        ### 🔐 Header Example
+        ```
+        Authorization: Bearer <your_jwt_token>
+        ```
+
+        ---
+
+        ## 🧾 Overview
+
+        | **Feature**        | **Method** | **Endpoint**  | **Auth Required** | **Description** |
+        |--------------------|------------|---------------|-------------------|-----------------|
+        | 🆕 **Create User** | `POST`     | `/api/user`  | ✅                | Creates a new user profile linked to the logged-in account. |
+        | 🔍 **Get User**    | `GET`      | `/api/user`  | ✅                | Fetches user profile details for the authenticated user. |
+        | ✏️ **Update User** | `PUT`      | `/api/user`  | ✅                | Updates user profile information such as activity level, weight, or height. |
+
+        ---
+
+        ## 🔑 JWT Authentication
+
+        All routes are protected using **JWT-based middleware**.  
+        Each request must include a valid token, typically obtained during login.
+
+        **Example Header:**
+        ```
+        Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+        ```
+
+        **If missing or invalid:**
+        ```json
         {
-          "url": "http://localhost:3001/hydration_goals/add/",
-          "name": "Create Goal",
-          "meta": {
-            "id": "req_339373d822bf4cfebc74fadd048afc88",
-            "created": 1758629638242,
-            "modified": 1758629740461,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758629638242
-          },
-          "method": "POST",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"goalMl\": 3000,\n  \"startDate\": \"2025-09-21\",\n  \"endDate\": \"2025-10-21\"\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
+          "error": "Unauthorized. Please provide a valid token."
+        }
+        ```
+
+        ---
+
+        ## ⚙️ Endpoints Summary
+
+        ### 1️⃣ Create User  
+        **POST** `/api/user`
+
+        Creates a new user profile with attributes such as **age**, **gender**, **activity level**, **climate**, **weight**, and **height**.
+
+        **Example Request:**
+        ```json
         {
-          "url": "http://localhost:3001/hydration_goals/delete/",
-          "name": "Delete Goal",
-          "meta": {
-            "id": "req_4fd6397185704b91a0d5e01323091fb7",
-            "created": 1758629771538,
-            "modified": 1758629855250,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758629771538
-          },
-          "method": "DELETE",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"goalId\": 1\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
+          "user_age": 25,
+          "gender": "male",
+          "activity_level": "medium",
+          "climate": "warm",
+          "user_weight": 70,
+          "user_height": 175,
+          "wake_up_time": "06:00",
+          "sleep_time": "22:30"
+        }
+        ```
+
+        **Example Response (201 Created):**
+        ```json
         {
-          "url": "http://localhost:3001/hydration_goals/get/2",
-          "name": "Get goal by user id",
-          "meta": {
-            "id": "req_bce7895a3271462bb906f3c366c9986c",
-            "created": 1758629914785,
-            "modified": 1758630688905,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758629914785
-          },
-          "method": "GET",
-          "headers": [
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/hydration_goals/update",
-          "name": "Update Goal",
-          "meta": {
-            "id": "req_deeffef399ce46faa3ea71b59db74c2d",
-            "created": 1758630019295,
-            "modified": 1758630707506,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758630019295
-          },
-          "method": "PUT",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"goalId\": 3,\n  \"goalMl\": 5000,\n  \"startDate\": \"2025-09-01T00:00:00.000Z\",\n  \"endDate\": \"2025-09-30T23:59:59.000Z\"\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
+          "message": "User created successfully",
+          "newUser": {
+            "user_id": 7,
+            "gender": "male",
+            "user_weight": 70
           }
         }
-      ]
-    },
-    {
-      "name": "Intake Logs",
-      "meta": {
-        "id": "fld_46a0d4e4237d4a789f9d0639764034dc",
-        "created": 1758630423982,
-        "modified": 1758630423982,
-        "sortKey": -1758630423982,
-        "description": ""
-      },
-      "children": [
+        ```
+
+        ---
+
+        ### 2️⃣ Get User  
+        **GET** `/api/user`
+
+        Retrieves the logged-in user’s profile details.
+
+        **Example Response (200 OK):**
+        ```json
         {
-          "url": "http://localhost:3001/intake_logs/create",
-          "name": "Create Logs",
-          "meta": {
-            "id": "req_096bdf7202d54caba53736abb9c4e5cf",
-            "created": 1758630427420,
-            "modified": 1758631579069,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758630427420
-          },
-          "method": "POST",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"volumeMl\": 500,\n  \"hydrationPct\": 80,\n  \"effectiveMl\": 400\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/intake_logs/delete",
-          "name": "Delete Logs",
-          "meta": {
-            "id": "req_02cd41af6a62476ba8985abbd41f060b",
-            "created": 1758630568339,
-            "modified": 1758630767309,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758630568339
-          },
-          "method": "DELETE",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"logId\": 2\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/intake_logs/update",
-          "name": "Update Logs",
-          "meta": {
-            "id": "req_3df1909edd8c42179fa0a3650a95b04e",
-            "created": 1758630791510,
-            "modified": 1758631275360,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758630791510
-          },
-          "method": "PUT",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"user_id\": 1,\n  \"logId\": 3,\n  \"volumeMl\": 500,\n  \"hydrationPct\": 90,\n  \"effectiveMl\": 450\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/intake_logs/get/1",
-          "name": "Get log by user id",
-          "meta": {
-            "id": "req_8c267edfacd04fa4804fc39d6a999966",
-            "created": 1758631258404,
-            "modified": 1758631318522,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758631258404
-          },
-          "method": "GET",
-          "headers": [
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
+          "message": "User retrieved successfully",
+          "User": {
+            "user_id": 7,
+            "activity_level": "medium"
           }
         }
-      ]
-    },
-    {
-      "name": "Drinks",
-      "meta": {
-        "id": "fld_1d68a26849f34dfaa170997691fafe95",
-        "created": 1758631659506,
-        "modified": 1758631665436,
-        "sortKey": -1758630424082,
-        "description": ""
-      },
-      "children": [
+        ```
+
+        ---
+
+        ### 3️⃣ Update User  
+        **PUT** `/api/user`
+
+        Updates fields such as **activity level**, **climate**, **weight**, **height**, **wake-up**, or **sleep time**.
+
+        **Example Request:**
+        ```json
         {
-          "url": "http://localhost:3001/drinks/create",
-          "name": "Create Drink",
-          "meta": {
-            "id": "req_6da0e2b30c6349adb09f76aeaaa0a060",
-            "created": 1758631670451,
-            "modified": 1758631896790,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758631670451
-          },
-          "method": "POST",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"name\": \"Orange Juice\",\n  \"hydrationPct\": 90\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
+          "activity_level": "high",
+          "climate": "cold",
+          "user_height": 178,
+          "user_weight": 72
+        }
+        ```
+
+        **Example Response (200 OK):**
+        ```json
         {
-          "url": "http://localhost:3001/drinks/all",
-          "name": "Get all drinks",
-          "meta": {
-            "id": "req_29ebaa372ee142269ac4e31eb229b77e",
-            "created": 1758631916471,
-            "modified": 1758631954652,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758631916471
-          },
-          "method": "GET",
-          "body": {
-            "mimeType": "application/json",
-            "text": ""
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/drinks/get/1",
-          "name": "Get drink by id",
-          "meta": {
-            "id": "req_c9c93318744a451e9d1d4fad23256f3c",
-            "created": 1758631978840,
-            "modified": 1758632006835,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758631978840
-          },
-          "method": "GET",
-          "headers": [
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/drinks/update/1",
-          "name": "Update Drink",
-          "meta": {
-            "id": "req_40d1753ec29d41dcbca8b435f7948c61",
-            "created": 1758632022484,
-            "modified": 1758632119888,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758632022484
-          },
-          "method": "PUT",
-          "body": {
-            "mimeType": "application/json",
-            "text": "{\n  \"name\": \"Orange Juice\",\n  \"hydrationPct\": 80\n}\n"
-          },
-          "headers": [
-            {
-              "name": "Content-Type",
-              "value": "application/json"
-            },
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
-          }
-        },
-        {
-          "url": "http://localhost:3001/drinks/delete/4",
-          "name": "Delete Drink",
-          "meta": {
-            "id": "req_65b0910458914b68a5d453860cb7e885",
-            "created": 1758632132284,
-            "modified": 1758632307034,
-            "isPrivate": false,
-            "description": "",
-            "sortKey": -1758632132284
-          },
-          "method": "DELETE",
-          "headers": [
-            {
-              "name": "User-Agent",
-              "value": "insomnia/11.6.1"
-            }
-          ],
-          "settings": {
-            "renderRequestBody": true,
-            "encodeUrl": true,
-            "followRedirects": "global",
-            "cookies": {
-              "send": true,
-              "store": true
-            },
-            "rebuildPath": true
+          "message": "User updated successfully",
+          "updatedUser": {
+            "user_id": 7,
+            "activity_level": "high"
           }
         }
-      ]
-    }
-  ],
-  "cookieJar": {
-    "name": "Default Jar",
-    "meta": {
-      "id": "jar_0c002cec2fa782ca157f61ad40e21df3f6a2772b",
-      "created": 1758463238167,
-      "modified": 1758463238167
-    }
-  },
-  "environments": {
-    "name": "Base Environment",
-    "meta": {
-      "id": "env_0c002cec2fa782ca157f61ad40e21df3f6a2772b",
-      "created": 1758463238154,
-      "modified": 1758631532628,
-      "isPrivate": false
-    },
-    "data": {
-      "LOCAL_URL": "http://localhost:3001/"
-    }
-  }
-}
+        ```
+
+        ---
+
+        ## ❌ Common Error Responses
+
+        | **Status Code** | **Meaning**      | **Example Message**                |
+        |-----------------|------------------|------------------------------------|
+        | `400`           | Bad Request      | `"Invalid value for enum field"`   |
+        | `401`           | Unauthorized     | `"Invalid or missing token"`       |
+        | `404`           | Not Found        | `"User not found"`                 |
+        | `500`           | Server Error     | `"Unexpected error occurred"`      |
+
+        ---
+
+
+    children:
+      - url: http://localhost:3001/user
+        name: Create
+        meta:
+          id: req_3fbe8ca115974c9cadc3b16fc73ff63a
+          created: 1762596976608
+          modified: 1762667855655
+          isPrivate: false
+          description: >
+            # 🆕 Create User API
+
+
+            **Method:** `POST`  
+
+            **Endpoint:** `/api/user`  
+
+            **Description:** Creates a new user profile for the authenticated
+            user.
+
+
+            ---
+
+
+            ### 🧾 Request Body
+
+
+            | Field            | Type     | Required |
+            Description                                                  |
+
+            |----------------- |--------- |---------
+            |------------------------------------------------------------ |
+
+            | `user_age`       | number   | ✅       | User’s age in
+            years.                                         |
+
+            | `gender`         | string   | ✅       | Gender of the user
+            (`male`, `female`, etc.).                 |
+
+            | `activity_level` | string   | ✅       | User’s physical activity
+            level (`low`, `medium`, `high`).    |
+
+            | `climate`        | string   | ✅       | Current climate of user’s
+            environment (`hot`, `cold`, etc.). |
+
+            | `user_weight`    | number   | ✅       | User’s weight in
+            kilograms.                                  |
+
+            | `user_height`    | number   | ✅       | User’s height in
+            centimeters.                                |
+
+            | `wake_up_time`   | string   | ✅       | Time the user wakes up
+            (e.g., `"06:30"`).                    |
+
+            | `sleep_time`     | string   | ✅       | Time the user goes to
+            sleep (e.g., `"22:00"`).               |
+
+
+            ---
+
+
+            ### 💡 Example Request
+
+            ```json
+
+            {
+              "user_age": 25,
+              "gender": "male",
+              "activity_level": "medium",
+              "climate": "warm",
+              "user_weight": 70,
+              "user_height": 175,
+              "wake_up_time": "06:00",
+              "sleep_time": "22:30"
+            }
+
+            ```
+
+
+            ---
+
+
+            ### ✅ Example Response (201 Created)
+
+            ```json
+
+            {
+              "message": "User created successfully",
+              "newUser": {
+                "id": 12,
+                "user_id": 7,
+                "user_age": 25,
+                "gender": "male",
+                "activity_level": "medium",
+                "climate": "warm",
+                "user_weight": 70,
+                "user_height": 175,
+                "wake_up_time": "06:00",
+                "sleep_time": "22:30"
+              }
+            }
+
+            ```
+
+
+            ---
+
+
+            ### ❌ Error Responses
+
+
+            | **Code** | **Message**                  |
+
+            |----------|-------------------------------|
+
+            | `400`    | `"Error retrieving user: ..."` |
+
+            | `404`    | `"User not found"`             |
+
+
+            ---
+          sortKey: -1762597068576
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "user_age": 25,
+              "gender": "male",
+              "activity_level": "moderate",
+              "climate": "warm",
+              "user_weight": 70,
+              "user_height": 175,
+              "wake_up_time": "06:30",
+              "sleep_time": "22:30"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_fdb1935656f64388a3a17f4bc543bd7d
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_c9e7a590a12e4298aaf90dee48c94ea3
+          - id: pair_2d27629ae24347a6a079b19e937cb215
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/user
+        name: Get
+        meta:
+          id: req_4240c367e9e64af69584014c60c25455
+          created: 1762597380046
+          modified: 1762667797997
+          isPrivate: false
+          description: >
+            Get User
+
+            | **Method** | **Endpoint** |
+            **Description**                             |
+
+            | ---------- | ------------ |
+            ------------------------------------------- |
+
+            | `GET`      | `/api/user` | Retrieves the authenticated user’s
+            profile. |
+
+
+            ### Example Response (200 OK)
+
+            ```json
+
+            {
+              "message": "User retrieved successfully",
+              "User": {
+                "user_id": 7,
+                "user_age": 25,
+                "gender": "male",
+                "activity_level": "medium",
+                "climate": "warm",
+                "user_weight": 70,
+                "user_height": 175,
+                "wake_up_time": "06:00",
+                "sleep_time": "22:30"
+              }
+            }
+
+            ```
+
+
+            Error Responses
+
+
+            | **Code** | **Message**                  |
+
+            | -------- | ---------------------------- |
+
+            | `404`    | `User not found`             |
+
+            | `400`    | `Error retrieving user: ...` |
+          sortKey: -1762597380046
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_30fdca8c583d4a3bb6efb3347756178e
+          - id: pair_934fb8de5ccf4c30b97b098a19844c79
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/user
+        name: Update
+        meta:
+          id: req_0c4dcd7a7501440ba3277a47438ba453
+          created: 1762597455672
+          modified: 1762667787497
+          isPrivate: false
+          description: >
+            Update User
+
+            | **Method** | **Endpoint** |
+            **Description**                                      |
+
+            | ---------- | ------------ |
+            ---------------------------------------------------- |
+
+            | `PUT`      | `/api/user` | Updates user information for the
+            authenticated user. |
+
+
+            | Field            | Type     | Required |
+            Description                      |
+
+            | ---------------- | -------- | -------- |
+            -------------------------------- |
+
+            | `activity_level` | `string` | ❌        | Updated physical activity
+            level. |
+
+            | `climate`        | `string` | ❌        | Updated
+            climate.                 |
+
+            | `wake_up_time`   | `string` | ❌        | Updated wake-up
+            time.            |
+
+            | `sleep_time`     | `string` | ❌        | Updated sleep
+            time.              |
+
+            | `user_height`    | `number` | ❌        | Updated
+            height.                  |
+
+            | `user_weight`    | `number` | ❌        | Updated
+            weight.                  |
+
+
+            ### Example Request
+
+            ```json
+
+            {
+              "activity_level": "high",
+              "climate": "cold",
+              "user_height": 178,
+              "user_weight": 72
+            }
+
+            ```
+
+
+            ### Example Response (200 OK)
+
+            ```json
+
+            {
+              "message": "User updated successfully",
+              "updatedUser": {
+                "user_id": 7,
+                "activity_level": "high",
+                "climate": "cold",
+                "user_height": 178,
+                "user_weight": 72
+              }
+            }
+
+            ```
+
+
+            Error Responses
+
+            | **Code** | **Message**                |
+
+            | -------- | -------------------------- |
+
+            | `400`    | `Error updating user: ...` |
+          sortKey: -1762597455672
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "activity_level": "moderate",
+              "climate": "warm",
+              "user_weight": 80,
+              "user_height": 175,
+              "wake_up_time": "06:30",
+              "sleep_time": "22:30"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_d58cd1ab11ab458f868c09fe76ff4694
+          - id: pair_429121651a3c41a8b89fcb281afff236
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Hydration Goals
+    meta:
+      id: fld_fecb5c64e4d64fa18a5859bc9014b58a
+      created: 1762597772393
+      modified: 1762667686833
+      sortKey: -1762597772393
+      description: |
+        # 💧 Hydration Goals API Documentation
+
+        **Base URL:** `/api/hydration_goals`  
+        **Authentication:** ✅ All endpoints require a valid JWT token in the `Authorization` header.
+
+        ---
+
+        ### 🔐 Header Example
+        ```
+        Authorization: Bearer <your_jwt_token>
+        ```
+
+        ---
+
+        ## 🧾 Overview
+
+        | **Feature**               | **Method** | **Endpoint**               | **Auth Required** | **Description**                                                                                      |
+        |----------------------------|------------|----------------------------|------------------|------------------------------------------------------------------------------------------------------|
+        | ➕ **Add Hydration Goal**   | `POST`     | `/api/hydration_goals`    | ✅                | Adds a hydration goal for the authenticated user. Auto-generates goal if `goalMl` is not provided. |
+        | 🔍 **Get Hydration Goals** | `GET`      | `/api/hydration_goals`     | ✅                | Retrieves all hydration goals for the authenticated user.                                           |
+        | ✏️ **Update Hydration Goal** | `PUT`    | `/api/hydration_goals`     | ✅                | Updates a specific hydration goal for the authenticated user.                                       |
+        | 🗑️ **Delete Hydration Goal** | `DELETE` | `/api/hydration_goals/:id` | ✅                | Soft deletes a hydration goal by marking it as deleted.                                             |
+
+        ---
+
+        ## ➕ Add Hydration Goal
+
+        **POST** `/api/hydration_goals`
+
+        | Field       | Type              | Required | Description                                                                          |
+        |------------ |----------------- |--------- |------------------------------------------------------------------------------------|
+        | `goalMl`    | number            | ❌       | Hydration goal in milliliters. If not provided, it will be calculated automatically. |
+        | `startDate` | string (ISO date) | ✅       | Start date of the goal.                                                              |
+        | `endDate`   | string (ISO date) | ✅       | End date of the goal.                                                                |
+
+        **Example Request:**
+        ```json
+        {
+          "goalMl": 2500,
+          "startDate": "2025-11-01",
+          "endDate": "2025-11-07"
+        }
+        ```
+
+        **Example Response (201 Created):**
+        ```json
+        {
+          "message": "Hydration goal added successfully",
+          "goal": {
+            "id": 1,
+            "user_id": 7,
+            "goalMl": 2500,
+            "startDate": "2025-11-01",
+            "endDate": "2025-11-07"
+          }
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                                                     |
+        |------------ |------------------------------------------------------------|
+        | `400`       | `"Error adding hydration goal: Invalid input or reminders generation failed."` |
+
+        ---
+
+        ## 🔍 Get Hydration Goals
+
+        **GET** `/api/hydration_goals`
+
+        **Example Response (200 OK):**
+        ```json
+        {
+          "message": "Hydration goals retrieved successfully",
+          "goals": [
+            {
+              "id": 1,
+              "user_id": 7,
+              "goalMl": 2500,
+              "startDate": "2025-11-01",
+              "endDate": "2025-11-07"
+            },
+            {
+              "id": 2,
+              "user_id": 7,
+              "goalMl": 2000,
+              "startDate": "2025-11-08",
+              "endDate": "2025-11-14"
+            }
+          ]
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                                   |
+        |------------ |------------------------------------------|
+        | `400`       | `"Error retrieving hydration goals: ..."` |
+
+        ---
+
+        ## ✏️ Update Hydration Goal
+
+        **PUT** `/api/hydration_goals`
+
+        | Field       | Type              | Required | Description                         |
+        |------------ |----------------- |--------- |-----------------------------------|
+        | `goalId`    | number            | ✅       | ID of the hydration goal to update. |
+        | `goalMl`    | number            | ❌       | New hydration goal in milliliters.  |
+        | `startDate` | string (ISO date) | ❌       | Updated start date.                 |
+        | `endDate`   | string (ISO date) | ❌       | Updated end date.                   |
+
+        **Example Request:**
+        ```json
+        {
+          "goalId": 1,
+          "goalMl": 2600,
+          "startDate": "2025-11-01",
+          "endDate": "2025-11-08"
+        }
+        ```
+
+        **Example Response (200 OK):**
+        ```json
+        {
+          "message": "Hydration goal updated successfully",
+          "goal": {
+            "id": 1,
+            "user_id": 7,
+            "goalMl": 2600,
+            "startDate": "2025-11-01",
+            "endDate": "2025-11-08"
+          }
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                                |
+        |------------ |----------------------------------------|
+        | `400`       | `"Error updating hydration goal: ..."` |
+
+        ---
+
+        ## 🗑️ Delete Hydration Goal (Soft Delete)
+
+        **DELETE** `/api/hydration_goals/:id`
+
+        | Parameter | Type   | Required | Description                         |
+        |-----------|--------|--------- |-----------------------------------|
+        | `id`      | number | ✅       | ID of the hydration goal to delete. |
+
+        **Example Response (200 OK):**
+        ```json
+        {
+          "message": "Hydration goal deleted successfully",
+          "deletedGoal": {
+            "id": 1,
+            "user_id": 7,
+            "goalMl": 2600
+          }
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                            |
+        |------------ |----------------------------------|
+        | `400`       | `"Error deleting hydration goal: ..."` |
+
+        ---
+    children:
+      - url: http://localhost:3001/hydration_goals
+        name: Create
+        meta:
+          id: req_92ae8a6a78584c5eafde8353f0458d9a
+          created: 1762597779719
+          modified: 1762667739944
+          isPrivate: false
+          description: |
+            ## ➕ Add Hydration Goal
+
+            **POST** `/api/hydration_goals`
+
+            | Field       | Type              | Required | Description                                                                          |
+            |------------ |----------------- |--------- |------------------------------------------------------------------------------------|
+            | `goalMl`    | number            | ❌       | Hydration goal in milliliters. If not provided, it will be calculated automatically. |
+            | `startDate` | string (ISO date) | ✅       | Start date of the goal.                                                              |
+            | `endDate`   | string (ISO date) | ✅       | End date of the goal.                                                                |
+
+            **Example Request:**
+            ```json
+            {
+              "goalMl": 2500,
+              "startDate": "2025-11-01",
+              "endDate": "2025-11-07"
+            }
+            ```
+
+            **Example Response (201 Created):**
+            ```json
+            {
+              "message": "Hydration goal added successfully",
+              "goal": {
+                "id": 1,
+                "user_id": 7,
+                "goalMl": 2500,
+                "startDate": "2025-11-01",
+                "endDate": "2025-11-07"
+              }
+            }
+            ```
+
+            **Error Responses:**
+
+            | Status Code | Message                                                     |
+            |------------ |------------------------------------------------------------|
+            | `400`       | `"Error adding hydration goal: Invalid input or reminders generation failed."` |
+
+            ---
+          sortKey: -1762597779719
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "startDate": "2025-11-01",
+              "endDate": "2025-11-30",
+              "goalMl": 2500
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_292223884e364dd2b8b44415ea31bf8b
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_5c69005ee6dc42cf91a83d175f3c1462
+          - id: pair_29da17b7737a46179df1fc59375f6fb3
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/hydration_goals
+        name: Get
+        meta:
+          id: req_0ffa224a07c3461b87bdb46d35172c95
+          created: 1762597982656
+          modified: 1762667726023
+          isPrivate: false
+          description: |-
+            ## 🔍 Get Hydration Goals
+
+            **GET** `/api/hydration_goals`
+
+            **Example Response (200 OK):**
+            ```json
+            {
+              "message": "Hydration goals retrieved successfully",
+              "goals": [
+                {
+                  "id": 1,
+                  "user_id": 7,
+                  "goalMl": 2500,
+                  "startDate": "2025-11-01",
+                  "endDate": "2025-11-07"
+                },
+                {
+                  "id": 2,
+                  "user_id": 7,
+                  "goalMl": 2000,
+                  "startDate": "2025-11-08",
+                  "endDate": "2025-11-14"
+                }
+              ]
+            }
+            ```
+
+            **Error Responses:**
+
+            | Status Code | Message                                   |
+            |------------ |------------------------------------------|
+            | `400`       | `"Error retrieving hydration goals: ..."` |
+
+            ---
+          sortKey: -1762597982656
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_9f582fb988704a609a2c8602faab01e8
+          - id: pair_5edf6345818243f1a616222bf8c72cf6
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/hydration_goals
+        name: Update
+        meta:
+          id: req_5a22bd0267b047f4855544975b8154e1
+          created: 1762598153257
+          modified: 1762667715124
+          isPrivate: false
+          description: >-
+            ##  Update Hydration Goal
+
+
+            **PUT** `/api/hydration_goals`
+
+
+            | Field       | Type              | Required |
+            Description                         |
+
+            |------------ |----------------- |---------
+            |-----------------------------------|
+
+            | `goalId`    | number            | ✅       | ID of the hydration
+            goal to update. |
+
+            | `goalMl`    | number            | ❌       | New hydration goal in
+            milliliters.  |
+
+            | `startDate` | string (ISO date) | ❌       | Updated start
+            date.                 |
+
+            | `endDate`   | string (ISO date) | ❌       | Updated end
+            date.                   |
+
+
+            **Example Request:**
+
+            ```json
+
+            {
+              "goalId": 1,
+              "goalMl": 2600,
+              "startDate": "2025-11-01",
+              "endDate": "2025-11-08"
+            }
+
+            ```
+
+
+            **Example Response (200 OK):**
+
+            ```json
+
+            {
+              "message": "Hydration goal updated successfully",
+              "goal": {
+                "id": 1,
+                "user_id": 7,
+                "goalMl": 2600,
+                "startDate": "2025-11-01",
+                "endDate": "2025-11-08"
+              }
+            }
+
+            ```
+
+
+            **Error Responses:**
+
+
+            | Status Code | Message                                |
+
+            |------------ |----------------------------------------|
+
+            | `400`       | `"Error updating hydration goal: ..."` |
+
+
+            ---
+          sortKey: -1762598153257
+        method: PUT
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "goalId": "61f13a20-1f82-4ca0-8492-509692223e64",
+              "goalMl": 3000,
+              "startDate": "2025-11-01",
+              "endDate": "2025-11-30"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_024d155df38f4af89fba0878387feed5
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_88d9ad4f503a491ea7300017ac3f4d1f
+          - id: pair_e30e2b3f046e49e6b5f83fa693294818
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/hydration_goals/61f13a20-1f82-4ca0-8492-509692223e64
+        name: Delete
+        meta:
+          id: req_180e01522f2046e48db48cef8d4bd7c7
+          created: 1762598252808
+          modified: 1762667706143
+          isPrivate: false
+          description: >-
+            ## Delete Hydration Goal (Soft Delete)
+
+
+            **DELETE** `/api/hydration_goals/:id`
+
+
+            | Parameter | Type   | Required |
+            Description                         |
+
+            |-----------|--------|---------
+            |-----------------------------------|
+
+            | `id`      | number | ✅       | ID of the hydration goal to delete.
+            |
+
+
+            **Example Response (200 OK):**
+
+            ```json
+
+            {
+              "message": "Hydration goal deleted successfully",
+              "deletedGoal": {
+                "id": 1,
+                "user_id": 7,
+                "goalMl": 2600
+              }
+            }
+
+            ```
+
+
+            **Error Responses:**
+
+
+            | Status Code | Message                            |
+
+            |------------ |----------------------------------|
+
+            | `400`       | `"Error deleting hydration goal: ..."` |
+
+
+            ---
+          sortKey: -1762598252808
+        method: DELETE
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_26dd6b36126a4e05a1c5e434a90641ab
+          - id: pair_ca68225ac7024959a1f889ce9f68ac57
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: Intake Log
+    meta:
+      id: fld_ed786df7ac89445984eb34eae4885d34
+      created: 1762598394634
+      modified: 1762667460045
+      sortKey: -1762598394634
+      description: |
+        # 🥤 Intake Log API Documentation
+
+        **Base URL:** `/api/intake_log`  
+        **Authentication:** ✅ All endpoints require a valid JWT token in the `Authorization` header.
+
+        ---
+
+        ### 🔐 Header Example
+        ```
+        Authorization: Bearer <your_jwt_token>
+        ```
+
+        ---
+
+        ## 🧾 Overview
+
+        | **Feature**        | **Method** | **Endpoint**       | **Auth Required** | **Description**                                                                           |
+        |------------------- |------------|------------------ |------------------|-------------------------------------------------------------------------------------------|
+        | 🔍 **Get Intake Logs** | `GET`      | `/api/intake_log` | ✅                | Retrieves all daily intake logs for the authenticated user.                               |
+        | ➕ **Add Intake Log**   | `POST`     | `/api/intake_log` | ✅                | Adds a new intake log for the user and updates hydration goal progress and daily summary. |
+
+        ---
+
+        ## 🔍 Get Intake Logs
+
+        **GET** `/api/intake_log`  
+        Retrieves all intake logs for the authenticated user (daily).
+
+        **Example Response (200 OK):**
+        ```json
+        {
+          "message": "Intake logs retrieved successfully",
+          "logs": [
+            {
+              "id": 1,
+              "user_id": 7,
+              "amount_ml": 250,
+              "date_time": "2025-11-09T08:30:00.000Z",
+              "date": "2025-11-09"
+            },
+            {
+              "id": 2,
+              "user_id": 7,
+              "amount_ml": 300,
+              "date_time": "2025-11-09T12:00:00.000Z",
+              "date": "2025-11-09"
+            }
+          ]
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                           |
+        |------------ |----------------------------------|
+        | `400`       | `"Error retrieving intake logs: ..."` |
+
+        ---
+
+        ## ➕ Add Intake Log
+
+        **POST** `/api/intake_log`
+        Adds a new intake log, updates hydration goal progress, and updates daily summary.
+
+        ### Request Body
+
+        | Field       | Type   | Required | Description                                                       |
+        |------------ |------- |--------- |-----------------------------------------------------------------|
+        | `amount_ml` | number | ✅       | Amount of fluid intake in milliliters. Must be greater than zero. |
+
+        **Example Request:**
+        ```json
+        {
+          "amount_ml": 300
+        }
+        ```
+
+        **Example Response (200 OK):**
+        ```json
+        {
+          "message": "Intake log successfully added",
+          "log": {
+            "id": 3,
+            "user_id": 7,
+            "amount_ml": 300,
+            "date_time": "2025-11-09T14:30:00.000Z",
+            "date": "2025-11-09"
+          }
+        }
+        ```
+
+        **Error Responses:**
+
+        | Status Code | Message                                                   |
+        |------------ |-----------------------------------------------------------|
+        | `400`       | `"Error adding intake log: Amount must be greater than zero"` |
+        | `404`       | `"Hydration goal not found"`                               |
+        | `500`       | `"Error adding intake log: Transaction failed"`           |
+
+        ---
+
+        ✅ **Tip for Insomnia Docs:**  
+        Paste this Markdown block directly into the **Documentation tab** — JSON blocks, tables, and headers will render neatly and be easy to read.
+    children:
+      - url: http://localhost:3001/intake_log
+        name: "Create "
+        meta:
+          id: req_69c0b1f87b9343f2a560c512c82cbca2
+          created: 1762598398843
+          modified: 1762667494813
+          isPrivate: false
+          description: >
+            ##  Add Intake Log
+
+
+            **POST** `/api/intake_log`   
+
+            Adds a new intake log, updates hydration goal progress, and updates
+            daily summary.
+
+
+            ### Request Body
+
+
+            | Field       | Type   | Required |
+            Description                                                       |
+
+            |------------ |------- |---------
+            |-----------------------------------------------------------------|
+
+            | `amount_ml` | number | ✅       | Amount of fluid intake in
+            milliliters. Must be greater than zero. |
+
+
+            **Example Request:**
+
+            ```json
+
+            {
+              "amount_ml": 300
+            }
+
+            ```
+
+
+            **Example Response (200 OK):**
+
+            ```json
+
+            {
+              "message": "Intake log successfully added",
+              "log": {
+                "id": 3,
+                "user_id": 7,
+                "amount_ml": 300,
+                "date_time": "2025-11-09T14:30:00.000Z",
+                "date": "2025-11-09"
+              }
+            }
+
+            ```
+
+
+            **Error Responses:**
+
+
+            | Status Code |
+            Message                                                   |
+
+            |------------
+            |-----------------------------------------------------------|
+
+            | `400`       | `"Error adding intake log: Amount must be greater
+            than zero"` |
+
+            | `404`       | `"Hydration goal not
+            found"`                               |
+
+            | `500`       | `"Error adding intake log: Transaction
+            failed"`           |
+
+
+            ---
+          sortKey: -1762598398843
+        method: POST
+        body:
+          mimeType: application/json
+          text: |
+            {
+              "amount_ml": 200
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+            id: pair_58779f9e08e84515b8bcbbc4f6c6a48e
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_97724db784fa4a4c8c747ea3b5cd63b6
+          - id: pair_a3fa3079f1a149f39c0907eb6db67a34
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: http://localhost:3001/intake_log
+        name: Get
+        meta:
+          id: req_7916e3aa267e44bd97bbe3a54e564fb6
+          created: 1762598812142
+          modified: 1762667477895
+          isPrivate: false
+          description: |-
+            ##  Get Intake Logs
+
+            **GET** `/api/intake_log`  
+            Retrieves all intake logs for the authenticated user (daily).
+
+            **Example Response (200 OK):**
+            ```json
+            {
+              "message": "Intake logs retrieved successfully",
+              "logs": [
+                {
+                  "id": 1,
+                  "user_id": 7,
+                  "amount_ml": 250,
+                  "date_time": "2025-11-09T08:30:00.000Z",
+                  "date": "2025-11-09"
+                },
+                {
+                  "id": 2,
+                  "user_id": 7,
+                  "amount_ml": 300,
+                  "date_time": "2025-11-09T12:00:00.000Z",
+                  "date": "2025-11-09"
+                }
+              ]
+            }
+            ```
+
+            **Error Responses:**
+
+            | Status Code | Message                           |
+            |------------ |----------------------------------|
+            | `400`       | `"Error retrieving intake logs: ..."` |
+
+            ---
+          sortKey: -1762598812142
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_25215fa68592412ebcbb08694eb7fe18
+          - id: pair_4beae732cd0c428e9d2898bbf9d5b154
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: User Intake summary
+    meta:
+      id: fld_2230dac0f3c94438b141384970193a9d
+      created: 1762599934394
+      modified: 1762667366899
+      sortKey: -1762599934394
+      description: |
+        # 📊 User Daily Intake Summary API
+
+        **Base URL:** `/api/user-summaries`  
+        **Authentication:** ✅ All endpoints require a valid JWT token in the `Authorization` header.
+
+        ---
+
+        ### 🔐 Header Example
+        ```
+        Authorization: Bearer <your_jwt_token>
+        ```
+
+        ---
+
+        ## 🧾 Overview
+
+        | **Feature**         | **Method** | **Endpoint**                 | **Auth Required** | **Description**                                                                                          |
+        |-------------------- |----------- |---------------------------- |-----------------|--------------------------------------------------------------------------------------------------------|
+        | 🔍 **Get User Summary** | `GET`      | `/api/user_day_summary/:type?` | ✅               | Retrieves the intake summary for the authenticated user. Optional `type` parameter specifies `daily`, `weekly`, or `monthly`. Defaults to `daily`. |
+
+        ---
+
+        ## 🔍 Get User Intake Summary
+
+        **GET** `/api/user_day_summary/:type?`  
+        Retrieves the intake summary for the authenticated user.
+
+        ### URL Parameters
+
+        | Parameter | Type   | Required | Description                                                              |
+        |-----------|--------|--------- |------------------------------------------------------------------------|
+        | `type`    | string | ❌       | Summary type: `"daily"`, `"weekly"`, `"monthly"`. Defaults to `"daily"`. |
+
+        ---
+
+        ### Example Response (200 OK)
+        ```json
+        {
+          "message": "User summary retrieved successfully",
+          "summary": [
+            {
+              "date": "2025-11-09",
+              "total_intake_ml": 1200,
+              "log_count": 3
+            },
+            {
+              "date": "2025-11-08",
+              "total_intake_ml": 1500,
+              "log_count": 4
+            }
+          ]
+        }
+        ```
+
+        ---
+
+        ### ❌ Error Responses
+
+        | Status Code | Message                            |
+        |------------ |----------------------------------|
+        | `400`       | `"Error retrieving user summary: ..."` |
+
+        ---
+
+        ✅ **Tip for Insomnia Docs:**  
+        Paste this Markdown block directly into the **Documentation tab** — tables, JSON blocks, and headers will render cleanly and readable.
+    children:
+      - url: http://localhost:3001/user_day_summary/weekly
+        name: Get
+        meta:
+          id: req_760ea9abc1b9459287d3d75ba2252711
+          created: 1762599947372
+          modified: 1762667393850
+          isPrivate: false
+          description: |-
+            ## 🔍 Get User Intake Summary
+
+            **GET** `/api/user_day_summary/:type?` 
+            Retrieves the intake summary for the authenticated user.
+
+            ### URL Parameters
+
+            | Parameter | Type   | Required | Description                                                              |
+            |-----------|--------|--------- |------------------------------------------------------------------------|
+            | `type`    | string | ❌       | Summary type: `"daily"`, `"weekly"`, `"monthly"`. Defaults to `"daily"`. |
+
+            ---
+
+            ### Example Response (200 OK)
+            ```json
+            {
+              "message": "User summary retrieved successfully",
+              "summary": [
+                {
+                  "date": "2025-11-09",
+                  "total_intake_ml": 1200,
+                  "log_count": 3
+                },
+                {
+                  "date": "2025-11-08",
+                  "total_intake_ml": 1500,
+                  "log_count": 4
+                }
+              ]
+            }
+            ```
+
+            ---
+
+
+            ### ❌ Error Responses
+
+            | Status Code | Message                            |
+            |------------ |----------------------------------|
+            | `400`       | `"Error retrieving user summary: ..."` |
+
+            ---
+          sortKey: -1762599947372
+        method: GET
+        headers:
+          - name: User-Agent
+            value: insomnia/11.6.2
+            id: pair_f7e88ca1d7574cf4b711bdc5ffec22ce
+          - id: pair_6aa032703b404d0da11a907dcfa70bf7
+            name: Authorization
+            value: Bearer
+              eyJhbGciOiJIUzI0NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTgxNDI3MjEsImlhdCI6MTc1ODEzNTUyMSwiaXNzIjoiYXF1YWd1YXJkIiwibmJmIjoxNzU4MTM1NTIxLCJ1c2VyX2lkIjoxLCJ1c2VyX3JvbGUiOiJhZG1pbiJ9.7pNZ9y1UiRofmdJkPJu6C7xxJdprZijvWIWs8XHn2xY
+            description: ""
+            disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_7aa21e0d1f56337d842788288da78ba4e1db4138
+    created: 1762596976370
+    modified: 1762596976370
+environments:
+  name: Base Environment
+  meta:
+    id: env_7aa21e0d1f56337d842788288da78ba4e1db4138
+    created: 1762596976310
+    modified: 1762667143797
+    isPrivate: false
+  data:
+    base_url: https://watertracker.tapandgoo.com/
+  subEnvironments:
+    - name: New Environment
+      meta:
+        id: env_0862c1baf47c408599ca69e4d8d3e78a
+        created: 1762667189040
+        modified: 1762667204262
+        isPrivate: false
+        sortKey: 1762667189040
+      data:
+        base_url: https://watertracker.tapandgoo.com/
