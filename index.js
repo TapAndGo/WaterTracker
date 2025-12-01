@@ -28,7 +28,7 @@ app.use("/intake_log", intake_logRoute);
 app.use("/user_day_summary", user_day_summaryRoute);
 
 
-app.listen(process.env.PORT, async () => {
+app.listen(process.env.PORT , '0.0.0.0', async () => {
   try {
     await sequelize.authenticate();
     console.log("✅ Database connected...");
