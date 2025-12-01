@@ -14,7 +14,7 @@ RUN npm install --production
 COPY . .
 
 # Expose the app port (default Express 3000)
-EXPOSE 3001
+EXPOSE 3003
 
 # Start the app
 CMD ["npm", "start"]
