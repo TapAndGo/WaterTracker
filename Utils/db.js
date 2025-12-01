@@ -1,7 +1,7 @@
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
 
-dotenv.config();
+dotenv.config({override: false});
 
 const sequelize = new Sequelize(
   process.env.POSTGRES_DB,      // db name
