@@ -86,6 +86,7 @@ It allows users to set hydration goals, log beverages, and track their progress 
 - MIT License © 2025
 
 - **✨ Author**
+
 - 
 
 - `Built with 💧 by ordo-chao.`
