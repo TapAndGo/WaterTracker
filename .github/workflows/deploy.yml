@@ -26,4 +26,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: ordochao/tapandgo:watertracker
+          tags: |
+            ordochao/tapandgo:watertracker
+            ordochao/tapandgo:watertracker-${{ github.sha }}
