@@ -87,7 +87,6 @@ It allows users to set hydration goals, log beverages, and track their progress 
 
 - **✨ Author**
 
-- 
 
 - `Built with 💧 by ordo-chao.`
 
