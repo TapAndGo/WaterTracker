@@ -1,27 +1,31 @@
-name: main
+name: CI/CD - Watertracker
 
 on:
   push:
-    branches: [ main ]  # or 'master' or any branch you prefer
+    branches: [ main ]
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      # Step 1: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
+      # Step 2: Set up Docker Buildx
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # Step 3: Log in to Docker Hub
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      - name: Build and push image
+      # Step 4: Build and push Docker images
+      - name: Build and push Docker images
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -29,3 +33,25 @@ jobs:
           tags: |
             ordochao/tapandgo:watertracker
             ordochao/tapandgo:watertracker-${{ github.sha }}
+
+      # Step 5: Set up kubectl
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: '1.30.0'
+
+      # Step 6: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        env:
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
+        run: |
+          # Decode kubeconfig
+          echo "$KUBE_CONFIG_DATA" | base64 --decode > kubeconfig
+          export KUBECONFIG=kubeconfig
+
+          # Update deployment with SHA tag
+          kubectl set image deployment/watertracker-app \
+            watertracker=ordochao/tapandgo:watertracker-${{ github.sha }}
+
+          # Wait for rollout to complete
+          kubectl rollout status deployment/watertracker-app
